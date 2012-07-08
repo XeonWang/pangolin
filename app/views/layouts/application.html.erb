@@ -7,8 +7,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	
-<%= yield %>
-
+	<div class="navbar navbar-fixed-top">
+	  <div class="navbar-inner">
+	    <div class="container">
+	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </a>
+	      <a class="brand" href="#">Pangolin</a>
+	      <div class="nav-collapse">
+	        <ul class="nav">
+	          <li><%= link_to "Index" %></li>
+	          <li><%= link_to "Home Page" %></li>
+	          <li><%= link_to "Contact Us" %></li>
+	          <li><%= link_to "Read Me" %></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="container">
+	  <%= yield %>
+	</div>
 </body>
 </html>
