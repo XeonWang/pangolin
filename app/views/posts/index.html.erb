@@ -1,15 +1,16 @@
-<div class="row">
-  <div class="span12">
+<div class="row-fluid">
+  <div class="span2"> </div>
+  <div class="span8">
     <br/><br/>
     <h1>Welcome to Pangolin</h1>
     
       <% @posts.each do |post| %>
-      <div class="row">
+      <div class="row-fluid">
           <div class="span1"><%= post.user %></div>
-          <div class="span7"><%= post.content %></div>
+          <div class="span8"><div class="well"><blockquote><%= post.content %></div></blockquote></div>
           <div class="span1"><%= link_to 'Show', post %></div>
           <div class="span1"><%= link_to 'Edit', edit_post_path(post) %></div>
-          <div class="span2"><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></div>
+          <div class="span1"><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></div>
       </div>
       <% end %>
     
