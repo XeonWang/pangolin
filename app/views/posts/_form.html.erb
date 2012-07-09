@@ -10,10 +10,9 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= f.label :user %><br />
-    <%= f.number_field :user %>
+    <%= f.select :user, @user_list.map {|r| [r.name,r.id] } %>
   </div>
   <div class="field">
     <%= f.label :content %><br />
