@@ -10,13 +10,21 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.select :user, @user_list.map {|r| [r.name,r.id] } %>
+  <div class="row">
+      <div class="span2">
+        <%= f.label :user %>
+      </div>
+      <div class="span8">
+        <%= f.select :user_id, @user_list.map {|r| [r.name,r.id] } %>
+      </div>
   </div>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_area :content %>
+  <div class="row">
+    <div class="span2">
+      <%= f.label :content %>
+    </div>
+    <div class="span8">
+      <%= f.text_area :content, :class => 'form-textarea' %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit %>
