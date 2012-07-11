@@ -2,27 +2,17 @@
    <% if @user.errors.any? %>
    <div class="alert alert-error">
     <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
-
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
   </div>
-    
   <% end %>
-  <%= render :partial => 'formfield', :field => "111" %>
-  <label>Name</label>
-  <input name="name" type="text" class="span9" placeholder="Type something…">
-  <span class="help-block">Input your name here</span>
 
-  <label>Password</label>
-  <input name="pwd" type="password" class="span9" placeholder="******">
-  <span class="help-block">Should contain at least 6 charactors</span>
-
-  <label>Icon</label>
-  <input name="img_url" type="text" class="span9" >
-  <span class="help-block"></span>
-  
+  <%= render :partial => 'share/form/textfield', :locals => { :label => "Name", :name => "name", :type => "text", :message => "Input user name"} %>
+  <%= render :partial => 'share/form/textfield', :locals => { :label => "Password", :name => "pwd", :type => "password", :message => "Should contain at least 6 charactors"} %>
+  <%= render :partial => 'share/form/textfield', :locals => { :label => "Icon", :name => "img_url", :type => "text", :message => ""} %>
+ 
   <button type="submit" class="btn">Regist</button>
 </form>
