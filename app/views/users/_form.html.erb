@@ -11,16 +11,17 @@
   </div>
     
   <% end %>
+  <%= render :partial => 'formfield', :field => "111" %>
   <label>Name</label>
-  <input name="name" type="text" class="span3" placeholder="Type something…">
+  <input name="name" type="text" class="span9" placeholder="Type something…">
   <span class="help-block">Input your name here</span>
 
   <label>Password</label>
-  <input name="pwd" type="password" class="span3" placeholder="******">
+  <input name="pwd" type="password" class="span9" placeholder="******">
   <span class="help-block">Should contain at least 6 charactors</span>
 
   <label>Icon</label>
-  <input name="img_url" type="text" class="span3" >
+  <input name="img_url" type="text" class="span9" >
   <span class="help-block"></span>
   
   <button type="submit" class="btn">Regist</button>
