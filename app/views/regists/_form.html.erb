@@ -1,0 +1,17 @@
+<%= form_for(@regist) do |f| %>
+  <% if @regist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@regist.errors.count, "error") %> prohibited this regist from being saved:</h2>
+
+      <ul>
+      <% @regist.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

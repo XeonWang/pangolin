@@ -1,29 +1,27 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<form class="well" action="/users" method="post">
+   <% if @user.errors.any? %>
+   <div class="alert alert-error">
+    <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
 
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
-    </div>
+  </div>
+    
   <% end %>
+  <label>Name</label>
+  <input name="name" type="text" class="span3" placeholder="Type something…">
+  <span class="help-block">Input your name here</span>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :pwd %><br />
-    <%= f.text_field :pwd %>
-  </div>
-  <div class="field">
-    <%= f.label :image_url %><br />
-    <%= f.text_field :image_url %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <label>Password</label>
+  <input name="pwd" type="password" class="span3" placeholder="******">
+  <span class="help-block">Should contain at least 6 charactors</span>
+
+  <label>Icon</label>
+  <input name="img_url" type="text" class="span3" >
+  <span class="help-block"></span>
+  
+  <button type="submit" class="btn">Regist</button>
+</form>
