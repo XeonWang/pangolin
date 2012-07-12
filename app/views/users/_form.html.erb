@@ -5,14 +5,14 @@
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
+        <%= debug @user %>
       <% end %>
       </ul>
   </div>
   <% end %>
-
-  <%= render :partial => 'share/form/textfield', :locals => { :label => "Name", :name => "name", :type => "text", :message => "Input user name"} %>
-  <%= render :partial => 'share/form/textfield', :locals => { :label => "Password", :name => "pwd", :type => "password", :message => "Should contain at least 6 charactors"} %>
-  <%= render :partial => 'share/form/textfield', :locals => { :label => "Icon", :name => "img_url", :type => "text", :message => ""} %>
+  <%= render :partial => 'share/form/textfield', :locals => { :model => "user", :label => "Name", :name => "name", :type => "text", :message => "Input user name"} %>
+  <%= render :partial => 'share/form/textfield', :locals => { :model => "user", :label => "Password", :name => "pwd", :type => "password", :message => "Should contain at least 6 charactors"} %>
+  <%= render :partial => 'share/form/textfield', :locals => { :model => "user", :label => "Icon", :name => "image_url", :type => "text", :message => ""} %>
  
   <button type="submit" class="btn">Regist</button>
 </form>
