@@ -48,6 +48,20 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
+    file_param = params[:image]
+    # file_name = file_param.original_filename
+    if file_param then
+      fileExtension = File.extname(file_param.original_filename)
+      file_name = @user.name + "_" + Time.now.to_i.to_s + fileExtension
+      fileFolder = "/images/icons/"
+      file_path = File.join('public' + fileFolder, file_name).to_s
+      File.open file_path, 'wb' do |f|
+        f.write(file_param.read)
+      end
+      @user.image_url = fileFolder + file_name
+    else
+      @user.image_url = User.default_icon_url
+    end
 
     respond_to do |format|
       if @user.save

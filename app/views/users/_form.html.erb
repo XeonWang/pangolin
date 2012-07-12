@@ -1,18 +1,26 @@
-<form class="well" action="/users" method="post">
-   <% if @user.errors.any? %>
-   <div class="alert alert-error">
-    <h4><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h4>
+<%= form_for @user, :html => {:multipart => true, :class => "well"} do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
       <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
-        <%= debug @user %>
       <% end %>
       </ul>
-  </div>
+    </div>
   <% end %>
-  <%= render :partial => 'share/form/textfield', :locals => { :model => "user", :label => "Name", :name => "name", :type => "text", :message => "Input user name"} %>
-  <%= render :partial => 'share/form/textfield', :locals => { :model => "user", :label => "Password", :name => "pwd", :type => "password", :message => "Should contain at least 6 charactors"} %>
-  <%= render :partial => 'share/form/textfield', :locals => { :model => "user", :label => "Icon", :name => "image_url", :type => "text", :message => ""} %>
- 
-  <button type="submit" class="btn">Regist</button>
-</form>
+
+      <%= f.label :Name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :Password %>
+      <%= password_field(:user, :pwd, :class => "") %>
+
+      <%= f.label :Icon %>
+      <input type="file" id="image" name="image" />
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
