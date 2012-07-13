@@ -3,6 +3,7 @@ Pangolin::Application.routes.draw do
   resources :users do
     collection do
       get "regist"
+      post "upload_icon"
     end
   end
   resources :posts

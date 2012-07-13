@@ -10,4 +10,8 @@
  *
  *= require_self
  *= require twitter/bootstrap
+ *= require style
+ *= require bootstrap-responsive.min
+ *= require bootstrap-image-gallery.min
+ *= require jquery.fileupload-ui
 */

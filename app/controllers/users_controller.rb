@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     @user = User.new
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -33,6 +34,7 @@ class UsersController < ApplicationController
 
   def regist
     @user = User.new
+    @user.sign = Time.now().to_i.to_s
     respond_to do |format|
       format.html
       format.json { render json: @user }
@@ -44,24 +46,27 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # POST /users
-  # POST /users.json
-  def create
-    @user = User.new(params[:user])
+  # POST /users/upload_icon
+  def upload_icon
     file_param = params[:image]
     # file_name = file_param.original_filename
     if file_param then
       fileExtension = File.extname(file_param.original_filename)
-      file_name = @user.name + "_" + Time.now.to_i.to_s + fileExtension
+      file_name = params[:sign] + fileExtension
       fileFolder = "/images/icons/"
       file_path = File.join('public' + fileFolder, file_name).to_s
       File.open file_path, 'wb' do |f|
         f.write(file_param.read)
       end
-      @user.image_url = fileFolder + file_name
-    else
-      @user.image_url = User.default_icon_url
+      render :text => fileFolder + file_name
     end
+  end
+
+  # POST /users
+  # POST /users.json
+  def create
+    @user = User.new(params[:user])
+    
 
     respond_to do |format|
       if @user.save

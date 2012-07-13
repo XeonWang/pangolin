@@ -13,3 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require jquery.ui.widget
+//= require jquery.iframe-transport
+//= require jquery.fileupload
+//= require jquery.fileupload-fp
+//= require jquery.fileupload-ui
+//= require locale
+//= require main
+//= require tmpl.min
+//= require load-image.min
+//= require canvas-to-blob.min
+//= require bootstrap.min
+//= require bootstrap-image-gallery.min

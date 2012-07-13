@@ -5,4 +5,3 @@ require File.expand_path('../application', __FILE__)
 Pangolin::Application.initialize!
 
 Rails.logger = Logger.new(STDOUT)
-Rails.logger = Log4r::Logger.new("Application Log")
