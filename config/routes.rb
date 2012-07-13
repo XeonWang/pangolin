@@ -1,6 +1,10 @@
 Pangolin::Application.routes.draw do
-  match "regist" => "users#regist"
-  resources :users 
+  # match "regist" => "users#regist"
+  resources :users do
+    collection do
+      get "regist"
+    end
+  end
   resources :posts
 
   # The priority is based upon order of creation:
