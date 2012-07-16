@@ -7,7 +7,7 @@ var loadImageFile = (function () {
 		};
 
 		return function () {
-			var aFiles = document.getElementById("user_image").files;
+			var aFiles = document.getElementById("user_image_url").files;
 			if (aFiles.length === 0) { return; }
 			if (!rFilter.test(aFiles[0].type)) { alert("You must select a valid image file!"); return; }
 			oFReader.readAsDataURL(aFiles[0]);
