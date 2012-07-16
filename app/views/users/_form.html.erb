@@ -1,7 +1,5 @@
 <div class="well">
-    <div class="row-fluid">
-    <div class="span7">
-      <%= form_for @user do |f| %>
+      <%= form_for @user, :html => {:multipart=> true} do |f| %>
         <% if @user.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -13,57 +11,27 @@
             </ul>
           </div>
         <% end %>
+        <div class="row-flud">
+          <div class="span7">
+            <%= f.label :Name %>
+            <%= f.text_field :name %>
 
-        <%= f.label :Name %>
-        <%= f.text_field :name %>
-
-        <%= f.label :Password %>
-        <%= password_field(:user, :pwd, :class => "") %>
-
-        <div class="actions">
-          <%= f.submit %>
+            <%= f.label :Password %>
+            <%= password_field(:user, :pwd, :class => "") %>
+            </div>
+            <div class="actions">
+          </div>
+          <div class="span5">
+            <%= label_tag("Icon") %>
+            <div id="imagePreview">
+              <img src="/images/icons/default.jpg" width="150" height="150" />
+            </div>
+            <span class="btn btn-success fileinput-button" style="margin-top:20px">
+                <span>Add Photo</span>
+                <%= file_field(:user, :image_url, :onchange => "loadImageFile()")%>
+            </span>
+          </div>
+          <%= f.submit("Regist", :class => "btn") %>
         </div> 
       <% end %>
-    </div>
-    <div class="span5">
-        <%= form_tag('/users/upload_icon', :multipart => true, :remote => true, :id => "fileupload") do%>
-            <%= label_tag("Icon") %>
-            <!-- The table listing the files available for upload/download -->
-            <table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
-            <%= hidden_field_tag("sign", @user.sign) %>
-            <span class="btn btn-success fileinput-button">
-                <i class="icon-plus icon-white"></i>
-                <span>Upload Photo...</span>
-                <input type="file" name="files[]" multiple>
-            </span>
-        <% end %>
-    </div>
-    </div>
-</div>  
-<!-- The template to display files available for upload -->
-<script id="template-upload" type="text/x-tmpl">
-{% for (var i=0, file; file=o.files[i]; i++) { %}
-    <tr class="template-upload fade">
-        <td class="preview"><span class="fade"></span></td>
-        {% if (file.error) { %}
-            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
-        {% } %}
-        <td class="cancel">{% if (!i) { %}
-            <button class="btn btn-warning">
-                <span>{%=locale.fileupload.cancel%}</span>
-            </button>
-        {% } %}</td>
-    </tr>
-{% } %}
-</script>
-<script id="template-download" type="text/x-tmpl">
-</script>
-<script src="/assets/jquery.ui.widget.js"></script>
-<script src="/assets/tmpl.min.js"></script>
-<script src="/assets/load-image.min.js"></script>
-<script src="/assets/canvas-to-blob.min.js"></script>
-<script src="/assets/jquery.fileupload.js"></script>
-<script src="/assets/jquery.fileupload-ui.js"></script>
-<script src="/assets/locale.js"></script>
-<script src="/assets/main.js"></script>
 </div>

@@ -3,6 +3,4 @@ class User < ActiveRecord::Base
 	def User::default_icon_url
 	  "/images/icons/default.jpg"
 	end
-
-	attr :sign, true
 end
