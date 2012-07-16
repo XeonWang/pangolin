@@ -45,22 +45,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # POST /users/upload_icon
-  def upload_icon
-    file_param = params[:image]
-    # file_name = file_param.original_filename
-    if file_param then
-      fileExtension = File.extname(file_param.original_filename)
-      file_name = params[:sign] + fileExtension
-      fileFolder = "/images/icons/"
-      file_path = File.join('public' + fileFolder, file_name).to_s
-      File.open file_path, 'wb' do |f|
-        f.write(file_param.read)
-      end
-      render :text => fileFolder + file_name
-    end
-  end
-
   # POST /users
   # POST /users.json
   def create
