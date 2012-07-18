@@ -1,4 +1,6 @@
 Pangolin::Application.routes.draw do
+  resources :logins
+
   # match "regist" => "users#regist"
   resources :users do
     collection do
