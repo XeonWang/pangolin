@@ -29,6 +29,7 @@
 	      		<%= link_to session[:user_name], login_path(session[:user_name]), method: :delete, confirm: 'Are You Sure To Logout?'%>
 	      	<% else %>
 	      		<%= link_to 'Login', new_login_path %>
+	      		<%= link_to 'Regist', regist_users_path, :style => 'padding:20px;' %>
 	      	<% end %>
 	      </span>
 	    </div>
