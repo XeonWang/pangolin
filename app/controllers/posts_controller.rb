@@ -25,7 +25,6 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
-    @user_list = User.all
     respond_to do |format|
       if session[:user_name]
         format.html # new.html.erb
@@ -45,7 +44,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-
+    @post.user = User.where("name = ?", session[:user_name]).first
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
