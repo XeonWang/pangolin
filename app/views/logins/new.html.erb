@@ -1,21 +1,29 @@
-<h1>User Login</h1>
-<% if @login.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@login.errors.count, "error") %> prohibited this login:</h2>
+<div class="row-fluid">
+  <div class="span4"></div>
+  <div class="span4">
+    <h1>User Login</h1>
+    <br/>
+    <% if @login.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@login.errors.count, "error") %> prohibited this login:</h2>
 
-  <ul>
-  <% @login.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
+      <ul>
+      <% @login.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <%= form_tag('/logins', :method => :post) do %>
+    	<%= label_tag('name', 'User Name:') %>
+    	<%= text_field_tag('user[name]') %>
+    	<%= label_tag('pwd', 'Password:') %>
+    	<%= password_field_tag('user[pwd]') %><br/>
+
+    	<%= submit_tag('Login', :class => 'btn') %>
+      <%= link_to 'Index', root_path, :class => 'btn' %>
+    <% end %>
+
+    
+  </div>
 </div>
-<% end %>
-<%= form_tag('/logins', :method => :post) do %>
-	<%= label_tag('name', 'User Name:') %>
-	<%= text_field_tag('user[name]') %>
-	<%= label_tag('pwd', 'Password:') %>
-	<%= password_field_tag('user[pwd]') %>
-	<%= submit_tag('Login') %>
-<% end %>
-
-<%= link_to 'Index', root_path %>
