@@ -7,7 +7,11 @@ Pangolin::Application.routes.draw do
       get "regist"
     end
   end
-  resources :posts
+  resources :posts do
+    member do
+      post "comment", :action => "add_comment"
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

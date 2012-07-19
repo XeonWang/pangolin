@@ -1,14 +1,55 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <b>User:</b>
-  <%= @post.user %>
-</p>
+<div class="row-fluid">
+	<div class="span2"> </div>
+  	<div class="span8" style="padding: 60px">
+		<p id="notice"><%= notice %></p>
+		<div class="row-fluid">
+			<div class="span2">
+				<p>
+				  <b>User:</b>
+				  <%= @post.user.name %>
+				  <%= image_tag @post.user.image_url %>
+				</p>
+			</div>
+			<div class="span10">
+				<p>
+				  <b>Content:</b>
+				</p>
+				<p>
+				  <%= @post.content %>
+				</p>
+			</div>
+		</div>
+		<% @post.comments.each do |comment| %>
+			<div class="row-fluid">
+				<div class="span2">
+					<p>
+					  <b>User:</b>
+					  <%= comment.user.name %>
+					  <%= image_tag comment.user.image_url %>
+					</p>
+				</div>
+				<div class="span10">
+					<p>
+					  <b>Content:</b>
+					</p>
+					<p>
+					  <%= comment.content %>
+					</p>
+				</div>
+			</div>
+		<% end %>
+		<% if session[:user_name] %>
+		<div class="row-fluid">
+			<div class="span12">
+			<%= form_tag comment_post_path(@post.id), :method => 'post' do %>
+				<%= label_tag "comment", "Comment:" %>
+				<%= text_area :comment, :content, :rows => 10, :style => 'width: 100%;'%>
+				<%= submit_tag "Submit Comment", :class => 'btn' %>
+			<% end %>
+			</div>
+		</div>
+		<% end %>
 
-<p>
-  <b>Content:</b>
-  <%= @post.content %>
-</p>
-
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+		<%= link_to 'Back', posts_path %>
+	</div>
+</div>

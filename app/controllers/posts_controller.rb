@@ -83,4 +83,20 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def add_comment
+    @post = Post.find(params[:id])
+    user = User.where("name = ?", session[:user_name]).first
+    @comment = Comment.new
+    @comment.post = @post
+    @comment.user = user
+    @comment.content = params[:comment][:content]
+
+    respond_to do |format|
+      if @comment.save
+        format.html { render action: "show", notice: 'Comment was successfully created.' }
+        format.json { render json: @post, status: :created, location: @post }
+      end
+    end
+  end
 end
