@@ -27,8 +27,12 @@ class PostsController < ApplicationController
     @post = Post.new
     @user_list = User.all
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
+      if session[:user_name]
+        format.html # new.html.erb
+        format.json { render json: @post }
+      else
+        format.html { redirect_to new_login_path }
+      end
     end
   end
 

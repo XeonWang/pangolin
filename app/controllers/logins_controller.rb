@@ -41,6 +41,7 @@ class LoginsController < ApplicationController
   def create
     @user = User.where(["name = ?", params[:user][:name]]).first
     @login = Login.new()
+    @login.action = Login.LOGIN
     saved = false
     if @user && @user.pwd == params[:user][:pwd] then
       @login.user = @user
@@ -79,12 +80,15 @@ class LoginsController < ApplicationController
   # DELETE /logins/1
   # DELETE /logins/1.json
   def destroy
-    @login = Login.find(params[:id])
-    @login.destroy
-
+    @user = User.where(["name = ?", session[:user_name]]).first
+    @login = Login.new()
+    @login.action = Login.LOGOUT
+    @login.user = @user
+    @login.save
+    session[:user_name] = nil
     respond_to do |format|
-      format.html { redirect_to logins_url }
-      format.json { head :no_content }
+      format.html { render action: "new" }
+      format.json { render json: @login.errors, status: :unprocessable_entity }
     end
   end
 end

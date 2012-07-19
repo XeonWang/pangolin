@@ -24,6 +24,11 @@
 	          <li><%= link_to "Read Me" %></li>
 	        </ul>
 	      </div>
+	      <span style="float:right; padding: 9px 10px 11px;">
+	      	<% if session[:user_name] %>
+	      		<%= link_to session[:user_name], login_path(session[:user_name]), method: :delete, confirm: 'Are You Sure To Logout?'%>
+	      	<% end %>
+	      </span>
 	    </div>
 	  </div>
 	</div>
