@@ -4,7 +4,7 @@
     <br/><br/></br>
     <h1>Welcome to Pangolin</h1>
     <br/></br>
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" id="subscrib_groups">
       <li class="active">
         <a href="#">All User</a>
       </li>
@@ -12,7 +12,7 @@
       <li><a href="<%= group.id %>"><%= group.name %></a></li>
       <% end %>
       <span class="badge badge-info" style="position: relative; top: 8px; background-color: #BBDCEC;">
-        <%= link_to '+', new_subscribe_group_path, :style => 'color:white;' %>
+        <%= link_to '+', subscribe_groups_path, :method => :post, :id => 'add_subscribe_group', :remote => true, :style => 'color:white;' %>
       </span>
     </ul>
       <% @posts.each do |post| %>
