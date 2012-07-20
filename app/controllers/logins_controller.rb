@@ -14,12 +14,13 @@ class LoginsController < ApplicationController
   # POST /logins.json
   def create
     @user = User.where(["name = ?", params[:user][:name]]).first
-    @login = Login.new()
+    @login = Login.new
     @login.action = Login.LOGIN
     saved = false
     if @user && @user.pwd.to_s == params[:user][:pwd] then
       @login.user = @user
       saved = @login.save
+      session[:user_id] = @user.id
       session[:user_name] = @user.name
     else
       @login.errors.add(:Failed, 'User name or password incorrect!')
@@ -39,10 +40,11 @@ class LoginsController < ApplicationController
   # DELETE /logins/1.json
   def destroy
     @user = User.where(["name = ?", session[:user_name]]).first
-    @login = Login.new()
+    @login = Login.new
     @login.action = Login.LOGOUT
     @login.user = @user
     @login.save
+    session[:user_id] = nil
     session[:user_name] = nil
     respond_to do |format|
       format.html { render action: "new" }

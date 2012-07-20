@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
-
+    @subscribe_groups = User.find(session[:user_id]).subscribe_groups
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     respond_to do |format|
-      if session[:user_name]
+      if session[:user_id]
         format.html # new.html.erb
         format.json { render json: @post }
       else
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(params[:post])
-    @post.user = User.where("name = ?", session[:user_name]).first
+    @post.user = User.find(session[:user_id])
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -86,7 +86,7 @@ class PostsController < ApplicationController
 
   def add_comment
     @post = Post.find(params[:id])
-    user = User.where("name = ?", session[:user_name]).first
+    user = User.find(session[:user])
     @comment = Comment.new
     @comment.post = @post
     @comment.user = user
