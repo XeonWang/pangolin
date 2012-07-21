@@ -16,7 +16,7 @@
     <% end %>
     <%= form_tag('/logins', :method => :post) do %>
     	<%= label_tag('name', 'User Name:') %>
-    	<%= text_field_tag('user[name]') %>
+    	<%= text_field_tag('user[name]', '', :required => "required") %>
     	<%= label_tag('pwd', 'Password:') %>
     	<%= password_field_tag('user[pwd]') %><br/>
 

@@ -14,7 +14,7 @@
         <div class="row-flud">
           <div class="span7">
             <%= f.label :Name %>
-            <%= f.text_field :name %>
+            <%= f.text_field :name, :required => 'required' %>
 
             <%= f.label :Password %>
             <%= password_field(:user, :pwd, :class => "") %>
