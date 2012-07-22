@@ -1,34 +1,36 @@
 <div class="row-fluid">
   <div class="span2"> </div>
   <div class="span8">
-    <br/><br/></br>
-    <h1>Welcome to Pangolin</h1>
-    <br/></br>
-    <ul class="nav nav-tabs" id="subscrib_groups">
-      <li class="active">
-        <a href="#">All User</a>
-      </li>
-      <% if session[:user_id] %>
-        <% @subscribe_groups && @subscribe_groups.each do |group| %>
-        <li><a href="<%= group.id %>"><%= group.name %></a></li>
+    <section>
+      <h1 class="pangolin_h1">Welcome to Pangolin</h1>
+      <nav>
+        <ul class="nav nav-tabs" id="subscrib_groups">
+          <li class="active">
+            <a href="#">All User</a>
+          </li>
+          <% if session[:user_id] %>
+            <% @subscribe_groups && @subscribe_groups.each do |group| %>
+            <li><a href="<%= group.id %>"><%= group.name %></a></li>
+            <% end %>
+            <span class="badge badge-info" style="position: relative; top: 8px; background-color: #BBDCEC;">
+              <%= link_to '+', subscribe_groups_path, :method => :post, :id => 'add_subscribe_group', :remote => true, :style => 'color:white;' %>
+            </span>
+          <% end %>
+        </ul>
+      </nav>
+        <% @posts.each do |post| %>
+        <article class="row-fluid">
+            <div class="span1"><%= post.user.name %> <%= image_tag post.user.image_url %></div>
+            <div class="span8"><div class="well"><blockquote><%= post.content %></div></blockquote></div>
+            <div class="span1"><%= link_to 'Show', post %></div>
+            <div class="span1"><%= link_to 'Edit', edit_post_path(post) %></div>
+            <div class="span1"><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></div>
+        </article>
         <% end %>
-        <span class="badge badge-info" style="position: relative; top: 8px; background-color: #BBDCEC;">
-          <%= link_to '+', subscribe_groups_path, :method => :post, :id => 'add_subscribe_group', :remote => true, :style => 'color:white;' %>
-        </span>
-      <% end %>
-    </ul>
-      <% @posts.each do |post| %>
-      <div class="row-fluid">
-          <div class="span1"><%= post.user.name %> <%= image_tag post.user.image_url %></div>
-          <div class="span8"><div class="well"><blockquote><%= post.content %></div></blockquote></div>
-          <div class="span1"><%= link_to 'Show', post %></div>
-          <div class="span1"><%= link_to 'Edit', edit_post_path(post) %></div>
-          <div class="span1"><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></div>
-      </div>
-      <% end %>
-    
-    <br />
-
-    <%= link_to 'New Post', new_post_path %>
+      <br />
+      <nav>
+        <%= link_to 'New Post', new_post_path %>
+      </nav>
+    </section>
   </div>
 </div>

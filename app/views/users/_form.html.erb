@@ -1,37 +1,35 @@
-<div class="well">
-      <%= form_for @user, :html => {:multipart=> true} do |f| %>
-        <% if @user.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= form_for @user, :html => {:multipart=> true, :class => "well"} do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-            <ul>
-            <% @user.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
-        <div class="row-flud">
-          <div class="span7">
-            <%= f.label :Name %>
-            <%= f.text_field :name, :required => 'required' %>
-
-            <%= f.label :Password %>
-            <%= password_field(:user, :pwd, :class => "") %>
-            </div>
-            <div class="actions">
-          </div>
-          <div class="span5">
-            <%= label_tag("Icon") %>
-            <div id="imagePreview">
-              <img src="/images/icons/default.jpg" width="150" height="150" />
-            </div>
-            <span class="btn btn-success" style="margin-top:20px; position: relative; overflow: hidden;">
-                <span>Add Photo</span>
-                <%= file_field(:user, :image_url, :onchange => "loadImageFile()", :style => 'position:absolute;opacity:0;top:0;right:0;')%>
-            </span>
-          </div>
-          <%= f.submit("Regist", :class => "btn") %>
-        </div> 
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
       <% end %>
-</div>
+      </ul>
+    </div>
+  <% end %>
+  <div class="row-flud">
+    <div class="span7">
+      <%= f.label :Name %>
+      <%= f.text_field :name, :required => 'required' %>
+
+      <%= f.label :Password %>
+      <%= password_field(:user, :pwd, :class => "") %>
+      </div>
+      <div class="actions">
+    </div>
+    <div class="span5">
+      <%= label_tag("Icon") %>
+      <div id="imagePreview">
+        <img src="/images/icons/default.jpg" width="150" height="150" />
+      </div>
+      <span class="btn btn-success" style="margin-top:20px; position: relative; overflow: hidden;">
+          <span>Add Photo</span>
+          <%= file_field(:user, :image_url, :onchange => "loadImageFile()", :style => 'position:absolute;opacity:0;top:0;right:0;')%>
+      </span>
+    </div>
+    <%= f.submit("Regist", :class => "btn") %>
+  </div> 
+<% end %>

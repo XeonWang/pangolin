@@ -1,18 +1,16 @@
-<div class="row-fluid">
+<section class="row-fluid">
   <div class="span4"></div>
   <div class="span4">
-    <h1>User Login</h1>
-    <br/>
+    <h1 class="pangolin_h1">User Login</h1>
     <% if @login.errors.any? %>
-    <div id="error_explanation">
+    <article id="error_explanation">
       <h2><%= pluralize(@login.errors.count, "error") %> prohibited this login:</h2>
-
       <ul>
       <% @login.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
-    </div>
+    </article>
     <% end %>
     <%= form_tag('/logins', :method => :post) do %>
     	<%= label_tag('name', 'User Name:') %>
@@ -22,8 +20,6 @@
 
     	<%= submit_tag('Login', :class => 'btn btn-primary') %>
       <%= link_to 'Index', root_path, :class => 'btn' %>
-    <% end %>
-
-    
+    <% end %>   
   </div>
-</div>
+</section>

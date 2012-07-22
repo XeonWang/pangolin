@@ -11,3 +11,6 @@
  *= require_self
  *= require twitter/bootstrap
 */
+.pangolin_h1 {
+	padding:60px 0px 30px 20px;
+}
