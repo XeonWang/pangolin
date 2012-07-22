@@ -27,7 +27,7 @@
       </div>
       <span class="btn btn-success" style="margin-top:20px; position: relative; overflow: hidden;">
           <span>Add Photo</span>
-          <%= file_field(:user, :image_url, :onchange => "loadImageFile()", :style => 'position:absolute;opacity:0;top:0;right:0;')%>
+          <%= file_field(:user, :image_url, :onchange => "loadImageFile()", :accept => "image/*", :style => 'position:absolute;opacity:0;top:0;right:0;')%>
       </span>
     </div>
     <%= f.submit("Regist", :class => "btn") %>
