@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @users = User.all
     @subscribe_groups = session[:user_id] && User.find(session[:user_id]).subscribe_groups
     respond_to do |format|
       format.html # index.html.erb

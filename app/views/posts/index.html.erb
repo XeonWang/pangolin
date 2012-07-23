@@ -39,9 +39,21 @@
     <button type="button" class="close" data-dismiss="modal">×</button>
     <h3>New Group</h3>
   </div>
-  <div class="modal-body" style="text-align: center;">
-    <%= label_tag "name", "Group Name:", :style => "margin-right: 10px; display: inline;" %>
-    <%= text_field_tag "name", "", :required => "required", :id => "new_group_name" %>
+  <div class="modal-body">
+    <div>
+      <%= label_tag "name", "Group Name:", :style => "margin-right: 10px; display: inline;" %>
+      <%= text_field_tag "name", "", :required => "required", :id => "new_group_name" %>
+    </div>
+    <div id="members_selection">
+      <%= label_tag "", "Members Selection:" %>
+      <% @users.each do |user| %>
+        <div>
+          <%= user.name %>
+          <%= image_tag user.image_url %>
+          View:<%= check_box_tag "member_user_"+user.id.to_s %>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="modal-footer">
     <a href="#" class="btn" data-dismiss="modal">Cancel</a>
