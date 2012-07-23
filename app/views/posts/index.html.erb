@@ -50,7 +50,7 @@
         <div>
           <%= user.name %>
           <%= image_tag user.image_url %>
-          View:<%= check_box_tag "member_user_"+user.id.to_s %>
+          View:<%= check_box_tag "member_users[]", user.id %>
         </div>
       <% end %>
     </div>
