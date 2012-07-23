@@ -12,9 +12,7 @@
             <% @subscribe_groups && @subscribe_groups.each do |group| %>
             <li><a href="<%= group.id %>"><%= group.name %></a></li>
             <% end %>
-            <span class="badge badge-info" style="position: relative; top: 8px; background-color: #BBDCEC;">
-              <%= link_to '+', subscribe_groups_path, :method => :post, :id => 'add_subscribe_group', :remote => true, :style => 'color:white;' %>
-            </span>
+            <%= link_to '+', "", :style => 'color:white; position: relative; top: 8px; background-color: #BBDCEC; text-decoration: none;', :"data-toggle" => "modal", :"data-target" => "#myModal", :class => "badge badge-info" %>
           <% end %>
         </ul>
       </nav>
@@ -33,4 +31,21 @@
       </nav>
     </section>
   </div>
+</div>
+
+<div class="modal hide fade" id="myModal">
+  <%= form_tag(subscribe_groups_path, :remote => true, :method => :post, :id => 'add_subscribe_group') do %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>New Group</h3>
+  </div>
+  <div class="modal-body" style="text-align: center;">
+    <%= label_tag "name", "Group Name:", :style => "margin-right: 10px; display: inline;" %>
+    <%= text_field_tag "name", "", :required => "required", :id => "new_group_name" %>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+    <%= button_tag "Confirm", :type => "submit", :class => "btn btn-primary" %>
+  </div>
+  <% end %>
 </div>
