@@ -1,5 +1,7 @@
 jQuery(document).ready(function(){
 	jQuery(function($) {
+	  loadPosts(0);
+
 	  $("#add_subscribe_group").bind("ajax:success", function(event, data, status, xhr) {
 	      $("#subscrib_groups li:last").after($("<li>"+ data +"</li>"));
 	      $('#myModal').modal('hide');
@@ -7,22 +9,36 @@ jQuery(document).ready(function(){
 		  	this.reset();
 		  });
 	  });
-	  $.ajax({
-	  	url: 'posts/post_list',
-	  	data: {
-	  		group: $('#subscrib_groups li[class=active] a').attr('groupid')
-	  	},
-	  	success: function(data, textStatus, jqXHR){
-	  		$.each(data, function(index, post){
-	  			$.tmpl('<article class="row-fluid">\
-	  				<div class="span1">${user.name}<img alt="Google" src="${user.image_url}" /></div>\
-	  				<div class="span8"><div class="well"><blockquote>${content}</div></blockquote></div>\
-	  				<div class="span1"><a href="/posts/${id}">Show</a></div>\
-	  				<div class="span1"><a href="/posts/${id}/edit">Edit</a></div>\
-	  				<div class="span1"><a href="/posts/${id}" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a></div>\
-	  				</article>', post).appendTo( "#post_list" );
-	  		});
-	  	}
-	  });
+
+	  $('#subscrib_groups li a').click(this, function(event){
+	  	var group_id = $(this).attr('groupid');
+	  	loadPosts(group_id);
+	  	$('.active').removeClass('active');
+	  	$(this).parent().addClass('active');
+	  	return false;
+	  })
 	});
 });
+
+function updatePostList(data, textStatus, jqXHR){
+	$('#post_list').empty();
+	$.each(data, function(index, post){
+		$.tmpl('<article class="row-fluid">\
+			<div class="span1">${user.name}<img alt="Google" src="${user.image_url}" /></div>\
+			<div class="span8"><div class="well"><blockquote>${content}</div></blockquote></div>\
+			<div class="span1"><a href="/posts/${id}">Show</a></div>\
+			<div class="span1"><a href="/posts/${id}/edit">Edit</a></div>\
+			<div class="span1"><a href="/posts/${id}" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a></div>\
+			</article>', post).appendTo( "#post_list" );
+	});
+}
+
+function loadPosts(group_id){
+	$.ajax({
+	  	url: 'posts/post_list',
+	  	data: {
+	  		group: group_id
+	  	},
+	  	success: updatePostList
+	  });
+}

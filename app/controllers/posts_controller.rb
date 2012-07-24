@@ -12,7 +12,14 @@ class PostsController < ApplicationController
   end
 
   def post_list
-    @posts = Post.all
+    group_id = params[:group] 
+    if group_id.to_i > 0
+      member_ids = SubscribeGroup.find(group_id).member_ids
+      @posts = Post.where("user_id in (?)", member_ids)
+    else
+      @posts = Post.all
+    end
+    
     respond_to do |format|
       format.json { render json: @posts.to_json(:include => :user) }
     end
