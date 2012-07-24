@@ -15,9 +15,9 @@ class PostsController < ApplicationController
     group_id = params[:group] 
     if group_id.to_i > 0
       member_ids = SubscribeGroup.find(group_id).member_ids
-      @posts = Post.where("user_id in (?)", member_ids)
+      @posts = Post.where("user_id in (?)", member_ids).order("created_at DESC")
     else
-      @posts = Post.all
+      @posts = Post.order("created_at DESC")
     end
     
     respond_to do |format|
