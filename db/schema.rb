@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120720062827) do
+ActiveRecord::Schema.define(:version => 20120724031316) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -46,6 +46,11 @@ ActiveRecord::Schema.define(:version => 20120720062827) do
   end
 
   add_index "subscribe_groups", ["user_id"], :name => "index_subscribe_groups_on_user_id"
+
+  create_table "subscribe_groups_members", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "subscribe_group_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
