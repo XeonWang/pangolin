@@ -100,7 +100,7 @@ class PostsController < ApplicationController
 
   def add_comment
     @post = Post.find(params[:id])
-    user = User.find(session[:user])
+    user = User.find(session[:user_id])
     @comment = Comment.new
     @comment.post = @post
     @comment.user = user
@@ -113,4 +113,12 @@ class PostsController < ApplicationController
       end
     end
   end
+
+  def reply
+      comment_id = params[:comment][11...-1].to_i
+      content = params[:content]
+      Comment.find(comment_id).sub_comments.create(:content => content)
+      render :text => "{success}"
+  end
+
 end

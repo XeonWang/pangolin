@@ -9,10 +9,10 @@ Pangolin::Application.routes.draw do
   end
 
   match "posts/post_list" => "posts#post_list"
+  match "posts/reply" => "posts#reply"
   resources :posts do
     member do
       post "comment", :action => "add_comment"
-
     end
   end
 

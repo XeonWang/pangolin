@@ -21,7 +21,7 @@
 				</div>
 			</article>
 			<% @post.comments.each do |comment| %>
-			<article class="row-fluid">
+			<article class="row-fluid" style="position: relative;" type="comment">
 					<div class="span2">
 						<p>
 						  <b>User:</b>
@@ -37,7 +37,13 @@
 						  <%= comment.content %>
 						</p>
 					</div>
+					<div class="btn" style="display: inline; position: absolute; right: 10px; bottom: 10px;">
+						Reply
+						<%= text_area :subcomment, comment.id, :rows => 3, :style => 'width:90%; display: none;' %>
+					</div>
+
 			</article>
+			
 			<% end %>
 		</section>
 		<% if session[:user_name] %>

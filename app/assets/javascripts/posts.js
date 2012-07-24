@@ -1,6 +1,8 @@
 jQuery(document).ready(function(){
 	jQuery(function($) {
-	  loadPosts(0);
+	  if($('#subscrib_groups').length){
+	    loadPosts(0);
+	  }
 
 	  $("#add_subscribe_group").bind("ajax:success", function(event, data, status, xhr) {
 	      $("#subscrib_groups li:last").after($("<li>"+ data +"</li>"));
@@ -17,6 +19,14 @@ jQuery(document).ready(function(){
 	  	$(this).parent().addClass('active');
 	  	return false;
 	  })
+
+	  $('article[type=comment] .btn').click(this, function(){
+	  	var textarea = $(this).children('textarea');
+	  	textarea.show();
+	  });
+
+	  $('article[type=comment] .btn textarea').keypress(saveReply);
+
 	});
 });
 
@@ -35,10 +45,33 @@ function updatePostList(data, textStatus, jqXHR){
 
 function loadPosts(group_id){
 	$.ajax({
-	  	url: 'posts/post_list',
+	  	url: '/posts/post_list',
 	  	data: {
 	  		group: group_id
 	  	},
 	  	success: updatePostList
 	  });
+}
+
+function saveReply(event){
+	var keycode = (event.keyCode ? event.keyCode : event.which);
+	var me = $(this);
+	if(keycode == '13'){
+		me.hide();
+		$.ajax({
+			url: '/posts/reply',
+			type: 'post',
+			data: {
+				comment: me.attr('name'),
+				content: me.val()
+			},
+			success: function(data, textStatus, jqXHR){
+				afterReplySaved(data, textStatus, jqXHR, me);
+			}
+		});
+	}
+}
+
+function afterReplySaved(data, textStatus, jqXHR, me){
+	me.val("");
 }
