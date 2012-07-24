@@ -8,9 +8,9 @@
 
 
 User.delete_all
-User.create(:name => "Google", :image_url => "google.jpg")
-User.create(:name => "MSN", :image_url => "msn.jpg")
-User.create(:name => "Apple", :image_url => "apple.jpg")
+User.create(:name => "Google", :image_url => "/images/icons/google.jpg")
+User.create(:name => "MSN", :image_url => "/images/icons/msn.jpg")
+User.create(:name => "Apple", :image_url => "/images/icons/apple.jpg")
 
 Post.delete_all
 Post.create(:user_id => 4, :content => 'Question: How can i delete an existing model and scaffolding in ruby on rails 3?

@@ -11,6 +11,13 @@ class PostsController < ApplicationController
     end
   end
 
+  def post_list
+    @posts = Post.all
+    respond_to do |format|
+      format.json { render json: @posts.to_json(:include => :user) }
+    end
+  end
+
   # GET /posts/1
   # GET /posts/1.json
   def show

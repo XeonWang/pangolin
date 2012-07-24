@@ -7,9 +7,12 @@ Pangolin::Application.routes.draw do
       get "regist"
     end
   end
+
+  match "posts/post_list" => "posts#post_list"
   resources :posts do
     member do
       post "comment", :action => "add_comment"
+
     end
   end
 
