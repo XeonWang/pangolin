@@ -19,6 +19,17 @@ class PostsController < ApplicationController
     else
       @posts = Post.order("created_at DESC")
     end
+
+    if session[:user_id]?
+      closed_posts = UserClosedPost.where("user_id = ?", session[:user_id])
+      @posts.each do |post|
+        closed_posts.each do |closed_post|
+          if post.id == closed_post.post_id
+            # remove this post
+          end
+        end
+      end
+    end
     
     respond_to do |format|
       format.json { render json: @posts.to_json(:include => :user) }
