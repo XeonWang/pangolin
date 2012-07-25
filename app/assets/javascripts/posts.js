@@ -22,7 +22,7 @@ jQuery(document).ready(function(){
 
 	  $('article[type=comment] .btn').click(this, function(){
 	  	var textarea = $(this).children('textarea');
-	  	textarea.show();
+	  	textarea.show().focus();
 	  });
 
 	  $('article[type=comment] .btn textarea').keypress(saveReply);
@@ -58,20 +58,26 @@ function saveReply(event){
 	var me = $(this);
 	if(keycode == '13'){
 		me.hide();
-		$.ajax({
-			url: '/posts/reply',
-			type: 'post',
-			data: {
-				comment: me.attr('name'),
-				content: me.val()
-			},
-			success: function(data, textStatus, jqXHR){
-				afterReplySaved(data, textStatus, jqXHR, me);
-			}
-		});
+		if($.trim(me.val())){
+			$.ajax({
+				url: '/posts/reply',
+				type: 'post',
+				data: {
+					comment: me.attr('name'),
+					content: me.val()
+				},
+				success: function(data, textStatus, jqXHR){
+					afterReplySaved(data, textStatus, jqXHR, me);
+				}
+			});
+		}
 	}
 }
 
-function afterReplySaved(data, textStatus, jqXHR, me){
+function afterReplySaved(reply, textStatus, jqXHR, me){
 	me.val("");
+	$(me.closest('article')).children('details').first().append($.tmpl('<dl style="text-indent: 50px;">\
+																			<dt>${username}</dt>\
+																			<dd>${content}</dd>\
+																		</dl>', {username: reply.user.name, content: reply.content}));
 }

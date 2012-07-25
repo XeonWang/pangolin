@@ -117,8 +117,11 @@ class PostsController < ApplicationController
   def reply
       comment_id = params[:comment][11...-1].to_i
       content = params[:content]
-      Comment.find(comment_id).sub_comments.create(:content => content)
-      render :text => "{success}"
+      @reply = Comment.find(comment_id).sub_comments.create(:content => content, :user_id => session[:user_id])
+      
+      respond_to do |format|
+        format.json { render json: @reply.to_json(:include => :user) }
+      end
   end
 
 end
