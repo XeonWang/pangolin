@@ -1,8 +1,11 @@
 <div class="row-fluid">
   <div class="span2"> </div>
   <div class="span8">
-    <section>
+    <section id="posts_head">
       <h1 class="pangolin_h1">Welcome to Pangolin</h1>
+      <% if session[:user_id] %>
+        <%= render 'form' %>
+      <% end %>
       <nav>
         <ul class="nav nav-tabs" id="subscrib_groups">
           <li class="active">
@@ -20,10 +23,7 @@
     <section id="post_list">
       
     </section>
-    <br />
-    <nav>
-      <%= link_to 'New Post', new_post_path %>
-    </nav>
+
   </div>
 </div>
 

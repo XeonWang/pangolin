@@ -12,6 +12,12 @@ jQuery(document).ready(function(){
 		  });
 	  });
 
+	  $("#posts_head form").bind("ajax:success", function(event, data, status, xhr) {
+	  	  var group_id = $('#subscrib_groups li.active').children('a').attr('groupid');
+	      loadPosts(group_id);
+	      this.reset();
+	  });
+
 	  $('#subscrib_groups li a').click(this, function(event){
 	  	var group_id = $(this).attr('groupid');
 	  	loadPosts(group_id);
@@ -27,6 +33,8 @@ jQuery(document).ready(function(){
 
 	  $('article[type=comment] .btn textarea').keypress(saveReply);
 
+	  
+
 	});
 });
 
@@ -35,12 +43,12 @@ function updatePostList(data, textStatus, jqXHR){
 	$.each(data, function(index, post){
 		$.tmpl('<article class="row-fluid">\
 			<div class="span1">${user.name}<img alt="Google" src="${user.image_url}" /></div>\
-			<div class="span8"><div class="well"><blockquote>${content}</div></blockquote></div>\
-			<div class="span1"><a href="/posts/${id}">Show</a></div>\
-			<div class="span1"><a href="/posts/${id}/edit">Edit</a></div>\
+			<div class="span10"><div class="well"><blockquote onclick="goto(\'/posts/${id}\')" style="cursor: pointer;">${content}</div></blockquote></div>\
 			<div class="span1"><a href="/posts/${id}" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a></div>\
 			</article>', post).appendTo( "#post_list" );
 	});
+
+	$('#post_list article blockquote').hover(addIntoLinkClass);
 }
 
 function loadPosts(group_id){
@@ -76,8 +84,14 @@ function saveReply(event){
 
 function afterReplySaved(reply, textStatus, jqXHR, me){
 	me.val("");
-	$(me.closest('article')).children('details').first().append($.tmpl('<dl style="text-indent: 50px;">\
+	$(me.closest('article')).children('details').first().append($.tmpl('<dl>\
 																			<dt>${username}</dt>\
 																			<dd>${content}</dd>\
 																		</dl>', {username: reply.user.name, content: reply.content}));
 }
+
+function addIntoLinkClass(){
+	$(this).toggleClass('link_into');
+}
+
+

@@ -48,7 +48,7 @@
 				<details>
 					<summary>Replies</summary>
 					<% comment.sub_comments.each do |reply| %>
-						<dl style="text-indent: 50px;">
+						<dl>
 							<dt><%= reply.user.name %></dt>
 							<dd><%= reply.content %></dd>
 						</dl>

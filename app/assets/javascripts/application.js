@@ -16,3 +16,7 @@
 //= require bootstrap-modal
 //= require bootstrap-transition
 //= require jquery.tmpl
+
+function goto(url){
+	window.location = url;
+}

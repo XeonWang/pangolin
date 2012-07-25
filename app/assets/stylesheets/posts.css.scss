@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .form-textarea {
-	width: 400px;
+	width: 800px;
 }
 
 #members_selection > div {
@@ -17,4 +17,12 @@
 
 summary {
 	outline: none;
+}
+
+details dl{
+	text-indent: 50px;
+}
+
+.link_into {
+	color: blue;
 }
