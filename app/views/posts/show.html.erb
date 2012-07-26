@@ -23,6 +23,7 @@
 					  <%= @post.content %>
 					</p>
 				</div>
+				<% if session[:user_id] %>
 				<div class="btn-group btn-small" style="position: absolute; right: 10px; bottom: 10px;">
 				  <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
 				    Share
@@ -33,6 +34,7 @@
 				    <li><%= link_to "Favorite", {:controller => "favorites", :post_id => @post.id}, :method => :post, :remote => true %></li>
 				  </ul>
 				</div>
+				<% end %>
 			</article>
 			<% @post.comments.each do |comment| %>
 			<article style="position: relative;" type="comment">

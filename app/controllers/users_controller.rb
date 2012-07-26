@@ -97,4 +97,14 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def home
+    user_id = session[:user_id]
+    if user_id
+      redirect_to user_path(session[:user_id])
+    else
+      redirect_to new_login_path
+    end  
+  end
+
 end

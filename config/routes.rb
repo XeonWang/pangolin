@@ -5,6 +5,7 @@ Pangolin::Application.routes.draw do
   resources :users do
     collection do
       get "regist"
+      get "home"
     end
   end
 

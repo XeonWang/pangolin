@@ -23,9 +23,7 @@ class PostsController < ApplicationController
     @posts.each do |post|
       source = post.source
       if source
-        logger.error("*****************" + post.id.to_s)
         post.content = source.content
-        logger.error("*****************" + post.content.to_s)
       end
     end
 
