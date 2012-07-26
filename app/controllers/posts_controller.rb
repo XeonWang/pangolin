@@ -20,6 +20,15 @@ class PostsController < ApplicationController
       @posts = Post.order("created_at DESC")
     end
 
+    @posts.each do |post|
+      source = post.source
+      if source
+        logger.error("*****************" + post.id.to_s)
+        post.content = source.content
+        logger.error("*****************" + post.content.to_s)
+      end
+    end
+
     if session[:user_id]
       closed_posts = UserClosedPost.select(:post_id).where("user_id = ?", session[:user_id])
       closed_post_ids = closed_posts.collect {|closed_post| closed_post.post_id}

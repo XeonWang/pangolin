@@ -29,7 +29,7 @@
 				    <span class="caret"></span>
 				  </a>
 				  <ul class="dropdown-menu">
-				    <li><%= link_to "Forward", "#", :method => :post %></li>
+				    <li><%= link_to "Forward", {:controller => "forwards", :post_id => @post.id}, :method => :post, :remote => true %></li>
 				    <li><%= link_to "Favorite", {:controller => "favorites", :post_id => @post.id}, :method => :post, :remote => true %></li>
 				  </ul>
 				</div>
