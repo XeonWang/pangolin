@@ -1,9 +1,13 @@
 <div class="row-fluid">
-	<div class="span2"> </div>
+	<div class="span2">
+		<nav style="padding: 100px 10px 0px 200px;">
+			<%= link_to 'Back', posts_path, :class => "btn" %>
+		</nav>
+	</div>
   	<div class="span8" style="padding: 60px">
 		<p id="notice"><%= notice %></p>
 		<section>
-			<article class="row-fluid well">
+			<article class="row-fluid well" style="position: relative;">
 				<div class="span2">
 					<p>
 					  <b>User:</b>
@@ -18,6 +22,16 @@
 					<p>
 					  <%= @post.content %>
 					</p>
+				</div>
+				<div class="btn-group btn-small" style="position: absolute; right: 10px; bottom: 10px;">
+				  <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">
+				    Share
+				    <span class="caret"></span>
+				  </a>
+				  <ul class="dropdown-menu">
+				    <li><%= link_to "Forward", "#", :method => :post %></li>
+				    <li><%= link_to "Favorite", {:controller => "favorites", :post_id => @post.id}, :method => :post, :remote => true %></li>
+				  </ul>
 				</div>
 			</article>
 			<% @post.comments.each do |comment| %>
@@ -69,8 +83,5 @@
 			</div>
 		</section>
 		<% end %>
-		<nav>
-			<%= link_to 'Back', posts_path %>
-		</nav>
 	</div>
 </div>

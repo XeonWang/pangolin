@@ -14,6 +14,7 @@ class LoginsController < ApplicationController
   # POST /logins.json
   def create
     @user = User.where(["name = ?", params[:user][:name]]).first
+    fsize = @user.favorites.size
     @login = Login.new
     @login.action = Login.LOGIN
     saved = false

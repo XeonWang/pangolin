@@ -18,6 +18,8 @@ Pangolin::Application.routes.draw do
 
   resources :subscribe_groups
 
+  resources :favorites
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

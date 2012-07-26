@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725224625) do
+ActiveRecord::Schema.define(:version => 20120726073425) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -63,6 +63,14 @@ ActiveRecord::Schema.define(:version => 20120725224625) do
 
   add_index "user_closed_posts", ["post_id"], :name => "index_user_closed_posts_on_post_id"
   add_index "user_closed_posts", ["user_id"], :name => "index_user_closed_posts_on_user_id"
+
+  create_table "user_favorites", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+  end
+
+  add_index "user_favorites", ["post_id"], :name => "index_user_favorites_on_post_id"
+  add_index "user_favorites", ["user_id"], :name => "index_user_favorites_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
