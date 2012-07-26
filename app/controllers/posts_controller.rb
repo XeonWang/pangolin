@@ -20,15 +20,14 @@ class PostsController < ApplicationController
       @posts = Post.order("created_at DESC")
     end
 
-    if session[:user_id]?
-      closed_posts = UserClosedPost.where("user_id = ?", session[:user_id])
-      @posts.each do |post|
-        closed_posts.each do |closed_post|
-          if post.id == closed_post.post_id
-            # remove this post
-          end
-        end
+    if session[:user_id]
+      closed_posts = UserClosedPost.select(:post_id).where("user_id = ?", session[:user_id])
+      closed_post_ids = closed_posts.collect {|closed_post| closed_post.post_id}
+      acl_range = []
+      @posts.to_a.each do |post|
+        acl_range.push(post) if closed_post_ids.include?(post.id)
       end
+      @posts.delete_if {|post| acl_range.include?(post)}
     end
     
     respond_to do |format|
@@ -101,7 +100,8 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post = Post.find(params[:id])
-    @post.destroy
+    UserClosedPost.create(:user_id => session[:user_id], :post => @post, :post_time => @post.created_at)
+    # @post.destroy
 
     respond_to do |format|
       format.html { redirect_to posts_url }
