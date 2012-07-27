@@ -41,7 +41,7 @@ function loadContents(category){
 	var url_map = {
 		publish : '/users/published_posts',
 		comment : '/comments/',
-		forward : '/users/published_posts',
+		forward : '/forwards/',
 		favorite : '/users/published_posts'
 	};
 

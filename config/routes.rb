@@ -24,7 +24,11 @@ Pangolin::Application.routes.draw do
 
   resources :favorites
 
-  resources :forwards
+  resources :forwards do
+    collection do
+
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
