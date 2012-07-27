@@ -42,7 +42,7 @@ function loadContents(category){
 		publish : '/users/published_posts',
 		comment : '/comments/',
 		forward : '/forwards/',
-		favorite : '/users/published_posts'
+		favorite : '/favorites/'
 	};
 
 	$.ajax({
