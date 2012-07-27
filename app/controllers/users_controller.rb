@@ -108,8 +108,8 @@ class UsersController < ApplicationController
   end
 
   def published_posts
-    posts = Post.where("user_id = ?", session[:user_id])
-    item_template = File.read(Rails.root + "app/views/users/published_item.jst")
+    posts = Post.where("user_id = ? and source_id is null", session[:user_id])
+    item_template = File.read(Rails.root + "app/views/users/_post_item.jst")
     response = JsonHtmlResponse.new
     response.jst = item_template
     response.data = posts

@@ -15,26 +15,19 @@
 <section>
 	<div class="row-fluid">
 		<div class="span2"> </div>
-		<div class="span8" style="position: relavite;">
-			<div class="tabbable tabs-left" style="position: absolute; left: 200px;">
+		<div class="span1" style="position: relavite;">
+			<div class="tabbable tabs-left" style="position: absolute;">
 			  <ul class="nav nav-tabs" id="home_content_category">
-			    <li class="active"><a href="#tab1" data-toggle="tab">Publish</a></li>
-			    <li><a href="#tab2" data-toggle="tab">Forward</a></li>
-			    <li><a href="#tab2" data-toggle="tab">Favorite</a></li>
+			    <li class="active"><a href="#tab1" data-toggle="tab" category="publish">My Publish</a></li>
+			    <li><a href="#tab2" data-toggle="tab" category="comment">My Comments</a></li>
+			    <li><a href="#tab2" data-toggle="tab" category="forward">My Forwards</a></li>
+			    <li><a href="#tab2" data-toggle="tab" category="favorite">My Favorites</a></li>
 			  </ul>
-			  <div class="tab-content" style="min-height: 500px;">
-			    <div class="tab-pane active" id="tab1">
-			      <section id="home_content_list">
-				      
-				  </section>
-			    </div>
-			  </div>
 			</div>
-		</div>		
+			
+		</div>	
+		<section id="home_content_list" class="span7">
+				      
+		</section>	
 	</div>
 </section>
-
-<nav>
-	<%= link_to 'Edit', edit_user_path(@user) %> |
-	<%= link_to 'Back', users_path %>
-</nav>

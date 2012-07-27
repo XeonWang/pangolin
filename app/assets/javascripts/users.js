@@ -17,26 +17,38 @@ var loadImageFile = (function () {
 	if (navigator.appName === "Microsoft Internet Explorer") {
 		return function () {
 			document.getElementById("imagePreview").filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = document.getElementById("imageInput").value;
-
 		}
 	}
 })();
 
 jQuery(document).ready(function(){
 	jQuery(function($) {
-	  if($('#home_content_category').length){
-	    loadContents(0);
-	  }
+	    if($('#home_content_category').length){
+	      loadContents('publish');
+	    }
 	});
+
+	$('#home_content_category li a').click(this, function(event){
+	  	var category = $(this).attr('category');
+	  	loadContents(category);
+	  	$('.active').removeClass('active');
+	  	$(this).parent().addClass('active');
+	  	return false;
+	})
 });
 
-function loadContents(group_id){
+function loadContents(category){
+	var url_map = {
+		publish : '/users/published_posts',
+		comment : '/comments/',
+		forward : '/users/published_posts',
+		favorite : '/users/published_posts'
+	};
+
 	$.ajax({
-	  	url: '/users/published_posts',
-	  	data: {
-	  	},
+	  	url: url_map[category],
 	  	success: updateContents
-	  });
+	});
 }
 
 function updateContents(data, textStatus, jqXHR){

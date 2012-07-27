@@ -38,12 +38,10 @@ jQuery(document).ready(function(){
 
 function updatePostList(data, textStatus, jqXHR){
 	$('#post_list').empty();
+	var jst = data.jst;
+	data = data.data
 	$.each(data, function(index, post){
-		$.tmpl('<article class="row-fluid">\
-			<div class="span1">${user.name}<img alt="Google" src="${user.image_url}" /></div>\
-			<div class="span10"><div class="well"><blockquote onclick="goto(\'/posts/${id}\')" style="cursor: pointer;">${content}</div></blockquote></div>\
-			<div class="span1"><a href="/posts/${id}" data-method="delete" rel="nofollow">Destroy</a></div>\
-			</article>', post).appendTo( "#post_list" );
+		$.tmpl(jst, post).appendTo( "#post_list" );
 	});
 
 	$('#post_list article blockquote').hover(addIntoLinkClass);

@@ -36,9 +36,14 @@ class PostsController < ApplicationController
       end
       @posts.delete_if {|post| acl_range.include?(post)}
     end
+
+    item_template = File.read(Rails.root + "app/views/posts/_item.jst")
+    response = JsonHtmlResponse.new
+    response.jst = item_template
+    response.data = @posts.as_json(:include => :user)
     
     respond_to do |format|
-      format.json { render json: @posts.to_json(:include => :user) }
+      format.json { render json: response }
     end
   end
 

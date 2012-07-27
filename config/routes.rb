@@ -18,6 +18,8 @@ Pangolin::Application.routes.draw do
     end
   end
 
+  resources :comments
+
   resources :subscribe_groups
 
   resources :favorites
