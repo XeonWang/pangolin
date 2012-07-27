@@ -21,3 +21,31 @@ var loadImageFile = (function () {
 		}
 	}
 })();
+
+jQuery(document).ready(function(){
+	jQuery(function($) {
+	  if($('#home_content_category').length){
+	    loadContents(0);
+	  }
+	});
+});
+
+function loadContents(group_id){
+	$.ajax({
+	  	url: '/users/published_posts',
+	  	data: {
+	  	},
+	  	success: updateContents
+	  });
+}
+
+function updateContents(data, textStatus, jqXHR){
+	$('#home_content_list').empty();
+	var jst = data.jst;
+	data = data.data
+	$.each(data, function(index, post){
+		$.tmpl(jst, post).appendTo( "#home_content_list" );
+	});
+
+	// $('#home_content_list article blockquote').hover(addIntoLinkClass);
+}

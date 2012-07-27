@@ -33,8 +33,6 @@ jQuery(document).ready(function(){
 
 	  $('article[type=comment] .btn textarea').keypress(saveReply);
 
-	  
-
 	});
 });
 

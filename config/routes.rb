@@ -6,6 +6,7 @@ Pangolin::Application.routes.draw do
     collection do
       get "regist"
       get "home"
+      get "published_posts"
     end
   end
 

@@ -1,16 +1,38 @@
-<h1 class="pangolin_h1">
-	Home Page
-</h1>
 <p id="notice"><%= notice %></p>
-<header>
+<header class="page-header pangolin_h1">
 	<div class="row-fluid">
-		<div class="span2"> </div>
+		<div class="span2">
+			<h1>
+				Home Page
+			</h1>
+		</div>
 		<div class="span8">
-			<div class="span2"><%= image_tag @user.image_url %></div>
+			<div class="span2"><%= image_tag @user.image_url, :style => "height: 150px;" %></div>
 			<div class="span10 label label-info" style="background: #98D9F8; margin-top: 50px; width: 60%; text-align: center; font-size: 18px;"><%= @user.name %></div>
 		</div>
 	</div>
 </header>
+<section>
+	<div class="row-fluid">
+		<div class="span2"> </div>
+		<div class="span8" style="position: relavite;">
+			<div class="tabbable tabs-left" style="position: absolute; left: 200px;">
+			  <ul class="nav nav-tabs" id="home_content_category">
+			    <li class="active"><a href="#tab1" data-toggle="tab">Publish</a></li>
+			    <li><a href="#tab2" data-toggle="tab">Forward</a></li>
+			    <li><a href="#tab2" data-toggle="tab">Favorite</a></li>
+			  </ul>
+			  <div class="tab-content" style="min-height: 500px;">
+			    <div class="tab-pane active" id="tab1">
+			      <section id="home_content_list">
+				      
+				  </section>
+			    </div>
+			  </div>
+			</div>
+		</div>		
+	</div>
+</section>
 
 <nav>
 	<%= link_to 'Edit', edit_user_path(@user) %> |
