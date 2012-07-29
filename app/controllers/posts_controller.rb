@@ -112,7 +112,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post = Post.find(params[:id])
-    UserClosedPost.create(:user_id => session[:user_id], :post => @post, :post_time => @post.created_at)
+    @post.destroy
     # @post.destroy
 
     respond_to do |format|
