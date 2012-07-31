@@ -1,6 +1,8 @@
 class ForwardsController < ApplicationController
 	def create
-		post = Post.new(:source_id => params[:post_id])
+		source = Post.find(params[:post_id])
+		source = source.source if source.source
+		post = Post.new(:source => source)
 	    post.user = User.find(session[:user_id])
 	    respond_to do |format|
 	      if post.save
@@ -18,9 +20,28 @@ class ForwardsController < ApplicationController
 	    item_template = File.read(Rails.root + "app/views/posts/_forward_item.jst")
 	    response = JsonHtmlResponse.new
 	    response.jst = item_template
+	    deleted_post =  Post.new(:id => 0, :content => "Source file has been deleted...")
+
+	    posts.each do |post|
+	    	if !post.source
+	    		post.source = deleted_post
+	    	end
+	    end
+
 	    response.data = posts.as_json(:include => [:user, :source])
 	    respond_to do |format|
 	      format.json { render json: response }
+	    end
+	end
+
+	def destroy
+	    @post = Post.find(params[:id])
+	    @post.destroy
+	    # @post.destroy
+
+	    respond_to do |format|
+	      format.html { redirect_to posts_url }
+	      format.json { head :no_content }
 	    end
 	end
 end
